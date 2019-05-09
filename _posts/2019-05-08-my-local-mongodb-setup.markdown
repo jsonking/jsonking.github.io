@@ -117,7 +117,7 @@ There is good help for each of the mlaunch sub-commands e.g. `mlaunch init -h`.
 
 Next we shall create a 3-shard cluster with a single node per shard (a 3x1 cluster). This is the kind of environment I use when working with sharding related features.
 
-To change from the default `./data/` directory mlaunch commands accept the ``--dir DIR`` argument. This give flexibility over where the files are stored. Here we will locate our environment in the `./sharded/` directory.
+To change from the default `./data/` directory mlaunch commands accept the ``--dir DIR`` argument. This gives flexibility over where the files are stored. Here we will locate our environment in the `./sharded/` directory.
 
 ```
 $ mlaunch init --dir sharded --sharded 3 --nodes 1 --replicaset
