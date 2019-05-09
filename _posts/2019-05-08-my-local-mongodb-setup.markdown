@@ -103,7 +103,7 @@ We can see that mongod is running. `--dbpath` is `/home/jason/data/db` which is 
 
 In the `data` directory there is a configuration file `.mlaunch_startup`. This can be edited; for example to change the default port the instance starts on.
 
-Finally, let's stop the environment:
+Finally, let's stop the cluster:
 ```
 $ mlaunch stop
 sent signal 15 to 1 process.
@@ -113,11 +113,11 @@ There is good help for each of the mlaunch sub-commands e.g. `mlaunch init -h`.
 
 ---
 
-# Creating a sharded environment
+# Creating a sharded cluster
 
-Next we shall create a 3-shard environment with a single node per shard (a 3x1 cluster). This is the kind of environment I use when working with sharding related features.
+Next we shall create a 3-shard cluster with a single node per shard (a 3x1 cluster). This is the kind of environment I use when working with sharding related features.
 
-To change from the default `./data/` directory mlaunch commands accept the ``--dir DIR`` argument so that you can control where the files are stored. Here we will locate our environment in the `./sharded/` directory.
+To change from the default `./data/` directory mlaunch commands accept the ``--dir DIR`` argument. This give flexibility over where the files are stored. Here we will locate our environment in the `./sharded/` directory.
 
 ```
 $ mlaunch init --dir sharded --sharded 3 --nodes 1 --replicaset
