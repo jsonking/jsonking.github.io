@@ -35,20 +35,22 @@ $ m stable
 MongoDB version 4.0.9 is not installed.
 Installation may take a while. Would you like to proceed? [Y/n] Y
 ```
-Once complete let's verify by launching the shell:
+Once complete let's verify by checking the version with shell:
 ```
-$ mongo --nodb
+$ mongo --version
 MongoDB shell version v4.0.9
-Welcome to the MongoDB shell.
 ...
-> exit
 ```
-The [homepage](https://github.com/aheckmann/m) describes how to use m in detail. Below are two commands I use frequently:
+The [homepage](https://github.com/aheckmann/m) describes how to use m in detail. Below are some example commands:
 ```
-# list the available versions
-$ m list 
+# show the currently installed versions
+$ m
+ ο 4.0.9
 
-# install and switch to a specific version
+# list the available versions
+$ m list
+
+# switch to a specific version (will download and install if necessary)
 $ m 3.6.12 
 ```
 
@@ -177,3 +179,7 @@ I've used these on Linux, macOS and Windows 10 under Windows Linux Subsystem (WL
 
 Thank you for reading this post - I hope it will be useful for your adventures with mongoDB!  
 Feel free to ask any questions or send me feedback - I also welcome any additional tips you have.
+
+---
+#### Updates
+- 20-05-2019 : Changed verification from `mongo --nodb` to `mongo --version` and added default `m` command to show installed versions. Thanks [Mark Baker-Munton](https://twitter.com/MarkBakerMunton)
