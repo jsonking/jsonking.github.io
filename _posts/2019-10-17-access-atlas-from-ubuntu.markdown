@@ -30,7 +30,7 @@ The atlas ui has a conversations window that can be used to ask support question
 I posted details of what i was trying to do and the error above. The response was not immediate: but within a couple of hours a support engineer answered and suspected that the operating system did not include the rootCA for the Atlas SSL certificate.
 
 This is what was suggested as a workaround:
-1. Download https://www.digicert.com/CACerts/DigiCertGlobalRootCA.crt
+1. Download <https://www.digicert.com/CACerts/DigiCertGlobalRootCA.crt>
 1. Convert the DER certificate to a PEM file
 
 ```
