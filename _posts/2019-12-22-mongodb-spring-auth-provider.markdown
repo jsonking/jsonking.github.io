@@ -2,8 +2,13 @@
 layout: post
 title:  "Creating a Spring MongoDBAuthenticationProvider"
 date:   2019-12-22 16:00:00 +0000
-categories: mongodb spring
+categories: [mongodb,spring]
 ---
+<style type="text/css" media="screen">
+  .highlight {
+    width: 900px;
+  }
+</style>
 # Introduction
 
 There are a lot of posts on the web on how to setup spring security with MongoDB.
@@ -31,14 +36,15 @@ db.createUser(
 
 Verify access via the shell:
 ```
-mongo  --authenticationDatabase admin -u jason -p jason123 admin --eval 'db.runCommand({listDatabases:1})'`
+mongo  --authenticationDatabase admin -u jason -p jason123 admin --eval 'db.runCommand({listDatabases:1})
 # databases should be printed
 ```
 
 # The AuthenticationProvider
 
 Lets jump straight into the code:
-```
+
+```java
 @Service
 public class MongoDBAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 ...
@@ -52,7 +58,7 @@ public MongoDBAuthenticationProvider(
 The constructor has two arguments: the mongoDB connection string and a `MongoDBClientFactory`. 
 The `MongoDBClientFactory` is a wrapper around the static `MongoClients.create` method to make testing easier:
 
-```
+```java
 @Configuration
 public class MongoDBClientFactory {
 
@@ -69,9 +75,11 @@ The interesting code is implemented in the `retrieveUser` method.
 - Using the client an attempt is made to list the database names and retrieve the first one. If the user is authenticated this should work.
 - Otherwise a `MongoSecurityException` is thrown from the driver. This is caught, wrapped in a `BadCredentialsException` and re-thrown:
 
-```
+```java
 @Override
-protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
+protected UserDetails retrieveUser(String username,
+                                   UsernamePasswordAuthenticationToken authentication)
+                                   throws AuthenticationException {
 
     ConnectionString connString = new ConnectionString(connectionString);
     MongoCredential credential = createCredential(username, authentication, connString);
@@ -93,11 +101,12 @@ protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticati
     return new User(username, authentication.getCredentials().toString(), Collections.emptyList());
 }
 
-private MongoCredential createCredential(String username, UsernamePasswordAuthenticationToken authentication, ConnectionString connString) {
+private MongoCredential createCredential(String username,
+                                         UsernamePasswordAuthenticationToken authentication,
+                                         ConnectionString connString) {
     char[] chars = authentication.getCredentials().toString().toCharArray();
     return MongoCredential.createCredential(username, connString.getDatabase(), chars);
 }
-
 ```
 
 - If the list databases command worked, a `User` is created and returned.
