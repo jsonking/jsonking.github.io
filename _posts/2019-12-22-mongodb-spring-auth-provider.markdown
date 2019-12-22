@@ -11,14 +11,13 @@ categories: [mongodb,spring]
 </style>
 # Introduction
 
-There are a lot of posts on the web on how to setup spring security with MongoDB.
-Many of these describe creating and managing your own `User` entities via JPA.
-The user data is usually stored in an application level collection such as `users`.
-
 This short post describes how to implement a spring `AuthenticationProvider` that will authenticate against MongoDB directly.
 Users will only be authenticated with the application if they are valid users in MongoDB.
 
 An example use-case for this would be for support applications / tooling on top of the database.
+
+This is an alternative to creating and managing your own `User` entities via JPA 
+where user data is usually stored in an application level collection such as `users`.
 
 # Database Setup
 Make sure that you have a secure instance of MongoDB running on the default port at `localhost:27017`.<br/>
@@ -56,7 +55,7 @@ public MongoDBAuthenticationProvider(
 }
 ```
 The constructor has two arguments: the mongoDB connection string and a `MongoDBClientFactory`. 
-The `MongoDBClientFactory` is a wrapper around the static `MongoClients.create` method to make testing easier:
+The `MongoDBClientFactory` is a simple wrapper around the static `MongoClients.create` method to make testing easier:
 
 ```java
 @Configuration
@@ -70,7 +69,7 @@ public class MongoDBClientFactory {
 ```
 
 The interesting code is implemented in the `retrieveUser` method.
-- `MongoClientSettings` are first created from the connectionString and credentials (username and password).
+- `MongoClientSettings` is first created from the connectionString and credentials (username and password).
 - Then a `MongoClient` is created.
 - Using the client an attempt is made to list the database names and retrieve the first one. If the user is authenticated this should work.
 - Otherwise a `MongoSecurityException` is thrown from the driver. This is caught, wrapped in a `BadCredentialsException` and re-thrown:
