@@ -89,12 +89,12 @@ protected UserDetails retrieveUser(String username,
             .build();
 
     try(MongoClient mongoClient = clientFactory.create(settings)) {
-        logger.info("Attempting to authenticate user '{}'", username);
+        log.info("Attempting to authenticate user '{}'", username);
         mongoClient.listDatabaseNames().first();
-        logger.info("User successfully authenticated user '{}'", username);
+        log.info("Successfully authenticated user '{}'", username);
     } catch(MongoSecurityException mse) {
         String message = String.format("User '%s' was not authenticated.", username);
-        logger.warn(message, mse);
+        log.warn(message, mse);
         throw new BadCredentialsException(message, mse);
     }
     return new User(username, authentication.getCredentials().toString(), Collections.emptyList());
