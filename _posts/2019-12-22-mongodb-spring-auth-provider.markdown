@@ -21,14 +21,14 @@ where user data is usually stored in an application level collection such as `us
 
 # Database Setup
 Make sure that you have a secure instance of MongoDB running on the default port at `localhost:27017`.<br/>
-Create a user for testing:
+Create a user for testing via the mongo shell:
 ```
 use admin
 db.createUser(
   {
     user: "jason",
     pwd: "jason123",
-    roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+    roles: [ "readWriteAnyDatabase" ]
   }
 )
 ```
