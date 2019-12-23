@@ -113,4 +113,4 @@ private MongoCredential createCredential(String username,
 
 # Summary
 This short post demonstrated how write a Spring `AuthenticationProvider` where authentication is done against users defined in MongoDB directly.
-The code is available as part of a simple web-application on github here: <https://github.com/jsonking/secure-web>
+The code is available as part of a simple web-application on github here: [MongoDBAuthenticationProvider.java](https://github.com/jsonking/secure-web/blob/master/src/main/java/com/jsonking/auth/MongoDBAuthenticationProvider.java)
