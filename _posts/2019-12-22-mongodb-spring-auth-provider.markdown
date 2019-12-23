@@ -35,7 +35,7 @@ db.createUser(
 
 Verify access via the shell:
 ```
-mongo  --authenticationDatabase admin -u jason -p jason123 admin --eval 'db.runCommand({listDatabases:1})
+mongo  --authenticationDatabase admin -u jason -p jason123 admin --eval 'db.runCommand({listDatabases:1})'
 # databases should be printed
 ```
 
